@@ -1,5 +1,6 @@
 import pandas as pd
-def resumenes(maestra_vs_sesiones,maestra_vs_resoluciones,maestra_vs_notificaciones,maestra_vs_fallos,maestra_vs_jescucha):
+#def resumenes(maestra_vs_sesiones,maestra_vs_resoluciones,maestra_vs_notificaciones,maestra_vs_fallos,maestra_vs_jescucha):
+def resumenes(maestra_vs_sesiones, maestra_vs_resoluciones, maestra_vs_notificaciones, maestra_vs_fallos):
     m_sesiones = (maestra_vs_sesiones.loc[:, [
                                                  'CORTE_x',
                                                  'Comparacion',
@@ -40,17 +41,18 @@ def resumenes(maestra_vs_sesiones,maestra_vs_resoluciones,maestra_vs_notificacio
                 ])
     m_fallos = m_fallos.assign(ORIGEN="FALLOS")
     # ----------------------------------------------------------------------------------------------------
-    m_jescucha = (maestra_vs_jescucha.loc[:, [
-                                             'CORTE_x',
-                                             'Comparacion',
-                                             'FECHA_global',
-                                         ]
-                ])
-    m_jescucha = m_jescucha.assign(ORIGEN="JUEZ_ESCUCHA")
+    #m_jescucha = (maestra_vs_jescucha.loc[:, [
+    #                                         'CORTE_x',
+    #                                         'Comparacion',
+    #                                         'FECHA_global',
+    #                                     ]
+    #            ])
+    #m_jescucha = m_jescucha.assign(ORIGEN="JUEZ_ESCUCHA")
 
 
     # ----------------------------------------------------------------------------------------------------
-    df_resumen = [m_sesiones, m_resoluciones, m_notificaciones, m_fallos,m_jescucha]
+    #df_resumen = [m_sesiones, m_resoluciones, m_notificaciones, m_fallos,m_jescucha]
+    df_resumen = [m_sesiones, m_resoluciones, m_notificaciones, m_fallos]
     df_resumen = pd.concat(df_resumen, ignore_index=True, sort=False)
     cant = 1 / len(df_resumen.index)
     df_resumen = df_resumen.assign(contador_resumen=1)
