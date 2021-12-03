@@ -2,7 +2,6 @@
 import pandas as pd
 import numpy as np
 
-
 def limpieza(ruta, df_magistrados_maestra):
     df_jescucha = pd.read_excel(ruta)
     df_jescucha = (df_jescucha.loc[:, [
@@ -86,9 +85,9 @@ def limpieza(ruta, df_magistrados_maestra):
     maestra_vs_jescucha['FECHA'] = [d.strftime('%Y-%m-%d') if not pd.isnull(d) else '' for d in
                                   maestra_vs_jescucha['FECHA']]
     maestra_vs_jescucha['FECHA'] = pd.to_datetime(maestra_vs_jescucha['FECHA'], format='%Y/%m/%d')
-    a = maestra_vs_jescucha['FECHA'].unique().tolist()
-    a = pd.to_datetime(a)
-    a = a.dropna().tolist()
+    a = maestra_vs_jescucha['F_ATENCION_INICIO2'].unique().tolist()
+    a = pd.to_datetime(a, format='%d-%m-%Y')
+
     maestra_vs_jescucha = maestra_vs_jescucha.assign(FECHA_global=a[0])
     n_registros_maestra_vs_jescucha = maestra_vs_jescucha.shape[0]
     maestra_vs_jescucha['N_REGISTROS'] = n_registros_maestra_vs_jescucha

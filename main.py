@@ -42,23 +42,23 @@ a_resoluciones       = directorio + '\\' +"02.Resoluciones_Firmada-Modificada V3
 a_notificaciones_asa = directorio + '\\' +"03.Notificaciones_Juez_x_dia ASA V3.xlsx"
 a_notificaciones_ase = directorio + '\\' +"03.Notificaciones_Juez_x_dia ASE V3.xlsx"
 a_fallos             = directorio + '\\' +"Sentido de Fallo Diario V3.xlsx"
-#a_jescucha           = directorio + '\\' +"JUEZ ESCUCHA-"+fecha+".xlsx"
+a_jescucha           = directorio + '\\' +"JUEZ ESCUCHA-"+fecha+".xlsx"
 # a_casillero        = directorio + '\\' +""
 #-----------------------------------------------------------------------------------------------------------------------
 # 'fail' # Si existe una tabla, genere pandas_gbq.gbq.TableCreationError.
 # 'replace' # Si la tabla existe, suéltela, vuelva a crearla e inserte los datos.
 # 'append' # Si existe una tabla, inserte los datos. Crear si no existe.
 
-bq_modo                     = 'append'
+bq_modo                     = 'replace'
 project_id                  = 'pe-pjp-cld-01'
-contenedor                  = 'PY_DATA_TRANS_DIGITAL'
+contenedor                  = 'PY_DATA_TRANS_DIGITAL2'
 bq_t_resumen                = 'resumen'
 bq_t_resumen_x              = 'resumen_X'
 bq_maestra_vs_sesiones      = 'maestra_vs_sesiones'
 bq_maestra_vs_resoluciones  = 'maestra_vs_resoluciones'
 bq_maestra_vs_notificaciones= 'maestra_vs_notificaciones'
 bq_maestra_vs_fallos        = 'maestra_vs_fallos'
-#bq_maestra_vs_jescuha       = 'maestra_vs_juez_escucha'
+bq_maestra_vs_jescuha       = 'maestra_vs_juez_escucha'
 #***********************************************************************************************************************
 #limpieza de dataos
 
@@ -84,12 +84,12 @@ for i in trange(1, file=sys.stdout, desc='******************** LECTURA Y LIMPIEZ
     for i in trange(random.randint(1, 5), file=sys.stdout, desc='-----MAESTRA VS FALLOS '):
         do_something()
 
-    #maestra_vs_jescucha       = jesc.limpieza(a_jescucha,df_maestra)
-    #for i in trange(random.randint(1, 5), file=sys.stdout, desc='-----MAESTRA VS JUEZ ESCUCHA'):
-    #    do_something()
+    maestra_vs_jescucha       = jesc.limpieza(a_jescucha,df_maestra)
+    for i in trange(random.randint(1, 5), file=sys.stdout, desc='-----MAESTRA VS JUEZ ESCUCHA'):
+        do_something()
 
-    #resumenes   = resumen.resumenes(maestra_vs_sesiones, maestra_vs_resoluciones, maestra_vs_notificaciones, maestra_vs_fallos, maestra_vs_jescucha)
-    resumenes   = resumen.resumenes(maestra_vs_sesiones, maestra_vs_resoluciones, maestra_vs_notificaciones, maestra_vs_fallos)
+    resumenes   = resumen.resumenes(maestra_vs_sesiones, maestra_vs_resoluciones, maestra_vs_notificaciones, maestra_vs_fallos, maestra_vs_jescucha)
+    #resumenes   = resumen.resumenes(maestra_vs_sesiones, maestra_vs_resoluciones, maestra_vs_notificaciones, maestra_vs_fallos)
     for i in trange(random.randint(1, 5), file=sys.stdout, desc='-----RESUMENES'):
         do_something()
 
@@ -143,11 +143,11 @@ for i in trange(1, file=sys.stdout, desc='******************** CARGA DE ARCHIVOS
                                   credentials=credentials)
     print("\033[1;31m" + bq_maestra_vs_fallos +"----------- Carga satisfactoria a BigQuery--OK!")
 # -----------------------------------------------------------------------------------------------------------------------
-    #errors0 = maestra_vs_jescucha.to_gbq(destination_table=contenedor + bq_maestra_vs_jescuha,
-    #                              project_id='pe-pjp-cld-01',
-    #                              if_exists=bq_modo,
-    #                              credentials=credentials)
-    #print("\033[1;31m" + bq_maestra_vs_jescuha +"----------- Carga satisfactoria a BigQuery--OK!")
+    errors0 = maestra_vs_jescucha.to_gbq(destination_table=contenedor + bq_maestra_vs_jescuha,
+                                  project_id='pe-pjp-cld-01',
+                                  if_exists=bq_modo,
+                                  credentials=credentials)
+    print("\033[1;31m" + bq_maestra_vs_jescuha +"----------- Carga satisfactoria a BigQuery--OK!")
 # -----------------------------------------------------------------------------------------------------------------------
 contenedor
 print("\033[1;33m"+"ALAMACENADO EN -> "+contenedor+'\033[0;m')

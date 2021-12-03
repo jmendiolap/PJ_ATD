@@ -75,8 +75,8 @@ def limpieza(ruta, df_magistrados_maestra):
                                   maestra_vs_fallos['FECHA']]
     maestra_vs_fallos['FECHA'] = pd.to_datetime(maestra_vs_fallos['FECHA'], format='%Y/%m/%d')
     a = maestra_vs_fallos['FECHA'].unique().tolist()
-    a = pd.to_datetime(a)
-    a = a.dropna().tolist()
+    a = pd.to_datetime(a, format='%Y-%m-%d')
+    a = a.strftime('%Y/%d/%m')
     maestra_vs_fallos = maestra_vs_fallos.assign(FECHA_global=a[0])
     n_registros_maestra_vs_fallos = maestra_vs_fallos.shape[0]
     maestra_vs_fallos['N_REGISTROS'] = n_registros_maestra_vs_fallos

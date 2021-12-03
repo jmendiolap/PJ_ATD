@@ -66,8 +66,8 @@ def limpieza(archivo_sesiones_asa, archivo_sesiones_ase, df_magistrados_maestra)
                                     maestra_vs_sesiones['FECHA']]
     maestra_vs_sesiones['FECHA'] = pd.to_datetime(maestra_vs_sesiones['FECHA'], format='%Y/%m/%d')
     a = maestra_vs_sesiones['FECHA'].unique().tolist()
-    a = pd.to_datetime(a)
-    a = a.dropna().tolist()
+    a = pd.to_datetime(a, format='%Y-%m-%d')
+    a = a.strftime('%Y/%d/%m')
     maestra_vs_sesiones = maestra_vs_sesiones.assign(FECHA_global=a[0])
     n_registros_maestra_vs_sesiones = maestra_vs_sesiones.shape[0]
     maestra_vs_sesiones['N_REGISTROS'] = n_registros_maestra_vs_sesiones

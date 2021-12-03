@@ -59,8 +59,8 @@ def limpieza(archivo_notificaciones_ase, archivo_notificaciones_asa, df_magistra
                                           maestra_vs_notificaciones['FECHA']]
     maestra_vs_notificaciones['FECHA'] = pd.to_datetime(maestra_vs_notificaciones['FECHA'], format='%Y/%m/%d')
     a = maestra_vs_notificaciones['FECHA'].unique().tolist()
-    a = pd.to_datetime(a)
-    a = a.dropna().tolist()
+    a = pd.to_datetime(a, format='%Y-%m-%d')
+    a = a.strftime('%Y/%d/%m')
     maestra_vs_notificaciones = maestra_vs_notificaciones.assign(FECHA_global=a[0])
     n_registros_maestra_vs_notificaciones = maestra_vs_notificaciones.shape[0]
     maestra_vs_notificaciones['N_REGISTROS'] = n_registros_maestra_vs_notificaciones
