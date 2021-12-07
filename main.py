@@ -1,19 +1,6 @@
-# LIBRERIAS
-import os
-import pandas as pd
-import numpy as np
-from google.cloud import bigquery
-from google.oauth2 import service_account
-import pandas_gbq
-import time
-import sys
-from tqdm import trange
-import random
-#from playsound import playsound
-# ----------------------------------
-import scripts_py.limp_maestra as limp
-# import scripts_py.unir_mismo
-import scripts_py.limp_sesiones as sesi
+
+JORGE
+
 # import limp_marcaciones as marc
 import scripts_py.limp_resoluciones as reso
 import scripts_py.limp_notificaciones as noti
